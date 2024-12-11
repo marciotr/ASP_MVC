@@ -1,0 +1,51 @@
+@model IEnumerable<ASP_MVC.Models.Customer>
+
+@{
+    ViewData["Title"] = "Customers List";
+}
+
+<h1 class="text-center mb-4">Customers List</h1>
+
+<div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">Registered Customers</h4>
+    </div>
+    <div class="card-body">
+        <a asp-action="Create" class="btn btn-success mb-3">Add New Customer</a>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Marital Status</th>
+                    <th>Date of Birth</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var customer in Model)
+                {
+                    <tr>
+                        <td>@customer.FullName</td>
+                        <td>@customer.MaritalStatus</td>
+                        <td>
+                            @if (customer.DateOfBirth.HasValue)
+                            {
+                                @customer.DateOfBirth.Value.ToString("dd/MM/yyyy")
+                            }
+                            else
+                            {
+                                <span>N/A</span>  <!-- Ou qualquer outro texto para quando a data estiver nula -->
+                            }
+                        </td>
+
+                        <td>
+                            <a asp-action="View" asp-route-id="@customer.Id" class="btn btn-info">View</a>
+                            <a asp-action="Edit" asp-route-id="@customer.Id" class="btn btn-primary">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@customer.Id" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

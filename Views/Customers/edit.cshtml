@@ -1,0 +1,134 @@
+@model ASP_MVC.Models.Customer
+
+@{
+    ViewData["Title"] = "Edit Customer";
+}
+
+<h1 class="text-center mb-4">Edit Customer</h1>
+
+<div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">Edit the customer's information</h4>
+    </div>
+    <div class="card-body">
+        <form asp-action="Edit" method="post">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+            <!-- Hidden Id field -->
+            <input type="hidden" asp-for="Id" />
+
+            <!-- Full Name -->
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="FullName" class="form-label fw-bold">Full Name</label>
+                    <input asp-for="FullName" class="form-control" />
+                    <span asp-validation-for="FullName" class="text-danger"></span>
+                </div>
+
+                <!-- Date of Birth -->
+                <div class="col-md-6 mb-3">
+                    <label asp-for="DateOfBirth" class="form-label fw-bold">Date of Birth</label>
+                    <input asp-for="DateOfBirth" type="date" class="form-control" />
+                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- RG and CPF -->
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="RG" class="form-label fw-bold">RG</label>
+                    <input asp-for="RG" class="form-control" />
+                    <span asp-validation-for="RG" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="CPF" class="form-label fw-bold">CPF</label>
+                    <input asp-for="CPF" class="form-control" />
+                    <span asp-validation-for="CPF" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Address -->
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Address" class="form-label fw-bold">Address</label>
+                    <input asp-for="Address" class="form-control" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+
+                <!-- Neighborhood -->
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Neighborhood" class="form-label fw-bold">Neighborhood</label>
+                    <input asp-for="Neighborhood" class="form-control" />
+                    <span asp-validation-for="Neighborhood" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- City and State -->
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="City" class="form-label fw-bold">City</label>
+                    <input asp-for="City" class="form-control" />
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="State" class="form-label fw-bold">State</label>
+                    <input asp-for="State" class="form-control" />
+                    <span asp-validation-for="State" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Complement and ZIP Code -->
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Complement" class="form-label fw-bold">Complement</label>
+                    <input asp-for="Complement" class="form-control" />
+                    <span asp-validation-for="Complement" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="ZIPCode" class="form-label fw-bold">ZIP Code</label>
+                    <input asp-for="ZIPCode" class="form-control" />
+                    <span asp-validation-for="ZIPCode" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Father and Mother Name -->
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="FatherName" class="form-label fw-bold">Father's Name</label>
+                    <input asp-for="FatherName" class="form-control" />
+                    <span asp-validation-for="FatherName" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="MotherName" class="form-label fw-bold">Mother's Name</label>
+                    <input asp-for="MotherName" class="form-control" />
+                    <span asp-validation-for="MotherName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Marital Status -->
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                <label asp-for="MaritalStatus" class="form-label fw-bold">Marital Status</label>
+                <select asp-for="MaritalStatus" class="form-select" required>
+                    <option value="">Select...</option>
+                    <option value="Married">Married</option>
+                    <option value="Single">Single</option>
+                    <option value="Divorced">Divorced</option>
+                    <option value="Widowed">Widowed</option>
+                </select>
+                <span asp-validation-for="MaritalStatus" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-between align-items-center">
+                <a asp-action="Index" class="btn btn-secondary">Back</a>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
+</div>

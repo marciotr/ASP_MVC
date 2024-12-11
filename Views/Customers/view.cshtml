@@ -1,0 +1,101 @@
+@model ASP_MVC.Models.Customer
+
+@{
+    ViewData["Title"] = "Customer Details";
+}
+
+<h1 class="text-center mb-4">Customer Details</h1>
+
+<div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">View the customer's information</h4>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">Full Name</label>
+                <p>@Model.FullName</p>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">Date of Birth</label>
+                <p>
+                    @if (Model.DateOfBirth.HasValue)
+                    {
+                        @Model.DateOfBirth.Value.ToString("yyyy-MM-dd")
+                    }
+                    else
+                    {
+                        <span>N/A</span>
+                    }
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">RG</label>
+                <p>@Model.RG</p>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">CPF</label>
+                <p>@Model.CPF</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">Address</label>
+                <p>@Model.Address</p>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">Neighborhood</label>
+                <p>@Model.Neighborhood</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">City</label>
+                <p>@Model.City</p>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">State</label>
+                <p>@Model.State</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">Complement</label>
+                <p>@Model.Complement</p>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">ZIP Code</label>
+                <p>@Model.ZIPCode</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">Father's Name</label>
+                <p>@Model.FatherName</p>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">Mother's Name</label>
+                <p>@Model.MotherName</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">Marital Status</label>
+                <p>@Model.MaritalStatus</p>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mt-4">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+</div>
