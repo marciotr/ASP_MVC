@@ -104,8 +104,7 @@ namespace ASP_MVC.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-            var customer = await _context.Customers
-                .FirstOrDefaultAsync(c => c.Id == id);
+            var customer = await _context.Customers.FirstOrDefaultAsync(c => c.Id == id);
 
             if (customer == null)
             {
@@ -123,9 +122,9 @@ namespace ASP_MVC.Controllers
             if (customer != null)
             {
                 _context.Customers.Remove(customer);
-
+                await _context.SaveChangesAsync();
             }
-            await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 

@@ -60,13 +60,13 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label asp-for="Address" class="form-label fw-bold">Address</label>
-                    <input asp-for="Address" class="form-control" placeholder="Enter address" required />
+                    <input asp-for="Address" id="Address" class="form-control" placeholder="Enter address" required />
                     <span asp-validation-for="Address" class="text-danger"></span>
                 </div>
 
                 <div class="col-md-6 mb-3">
                     <label asp-for="Neighborhood" class="form-label fw-bold">Neighborhood</label>
-                    <input asp-for="Neighborhood" class="form-control" placeholder="Enter neighborhood" required />
+                    <input asp-for="Neighborhood" id="Neighborhood" class="form-control" placeholder="Enter neighborhood" required />
                     <span asp-validation-for="Neighborhood" class="text-danger"></span>
                 </div>
             </div>
@@ -74,13 +74,13 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label asp-for="City" class="form-label fw-bold">City</label>
-                    <input asp-for="City" class="form-control" placeholder="Enter city" required />
+                    <input asp-for="City" id="City" class="form-control" placeholder="Enter city" required />
                     <span asp-validation-for="City" class="text-danger"></span>
                 </div>
 
                 <div class="col-md-6 mb-3">
                     <label asp-for="State" class="form-label fw-bold">State</label>
-                    <input asp-for="State" class="form-control" maxlength="2" />
+                    <input asp-for="State" id="State" class="form-control" maxlength="2" />
                     <span asp-validation-for="State" class="text-danger"></span>
                 </div>
             </div>
@@ -117,14 +117,83 @@
     </div>
 </div>
 
+<script>
+    var rgMask = IMask(
+        document.getElementById('RG'), {
+        mask: [
+            {
+                mask: '00.000.00-0',
+
+            }
+        ],
+        lazy: true,
+        placeholderChar: '_'
+    });
+
+    var cpfMask = IMask(
+        document.getElementById('CPF'), {
+        mask: [
+            {
+                mask: '000.000.000-00',
+
+            }
+        ],
+        lazy: true,
+        placeholderChar: '_'
+    });
+
+    var cepMask = IMask(
+        document.getElementById('ZIPCode'), {
+        mask: [
+            {
+                mask: '00000-000',
+
+            }
+        ],
+        lazy: true,
+        placeholderChar: '_'
+    });
+
+    function SearchZipCode() {
+        let cep = document.getElementById("ZIPCode").value;
+
+        if (cep != "") {
+            let url = "https://brasilapi.com.br/api/cep/v1/" + cep;
+
+            let req = new XMLHttpRequest();
+
+            req.open("GET", url);
+            req.send();
+
+            // trata a resposta
+            req.onload = function () {
+                if (req.status === 200) {
+                    let address = JSON.parse(req.response);
+
+                    document.getElementById("Address").value = address.street.toUpperCase();
+                    document.getElementById("Neighborhood").value = address.neighborhood.toUpperCase();
+                    document.getElementById("City").value = address.city.toUpperCase();
+                    document.getElementById("State").value = address.state.toUpperCase();
+                    
+                }
+                else if (req.status === 404) {
+                    alert("CEP ínválido");
+                }
+                else {
+                    alert("Erro ao fazer a requisição");
+                }
+            }
+        }
+    }
+
+    window.onload = function () {
+        let address_ZipCode = document.getElementById("ZIPCode");
+        address_ZipCode.addEventListener("blur", SearchZipCode);
+    }
+</script>
+
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-    @{
-        await Html.RenderPartialAsync("_CEPPartial");
-    }
-    @{
-        await Html.RenderPartialAsync("_ImaskCEPPartial");
     }
 }
